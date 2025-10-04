@@ -294,10 +294,33 @@
             z-index: 100;
         }
 
-        .download-btn {
+        .nav-buttons {
             position: absolute;
             top: 30px;
             right: 50px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .download-btn {
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             color: white;
             border: none;
@@ -307,7 +330,6 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 100;
         }
 
         .download-btn:hover {
@@ -403,18 +425,25 @@
                 padding: 8px 15px;
                 font-size: 1em;
             }
-            .download-btn {
+            .nav-buttons {
                 top: 20px;
                 right: 30px;
+                gap: 10px;
+            }
+            .nav-btn, .download-btn {
                 padding: 10px 20px;
                 font-size: 0.9em;
             }
         }
 
         @media (max-width: 480px) {
-            .download-btn {
+            .nav-buttons {
                 top: 15px;
                 right: 20px;
+                gap: 8px;
+                flex-direction: column;
+            }
+            .nav-btn, .download-btn {
                 padding: 8px 15px;
                 font-size: 0.8em;
             }
@@ -445,8 +474,11 @@
 </head>
 <body>
     <div class="presentation-container">
-        <!-- Download Button -->
-        <button class="download-btn" id="downloadBtn">📥 Download Presentation</button>
+        <!-- Navigation Buttons -->
+        <div class="nav-buttons">
+            <button class="nav-btn home-btn" onclick="window.location.href='index.html'">🏠 Home</button>
+            <button class="download-btn" id="downloadBtn">📥 Download Presentation</button>
+        </div>
         
         <!-- Slide 1 -->
         <div class="slide active" data-slide="1">
@@ -457,7 +489,7 @@
             <div class="slide-content">
                 <div class="slide-1-content">
                     <div class="slide-1-image">
-                        <img src="/images/slide1(1).jpg" alt="Quantum Era Introduction">
+                        <img src="images/slide1(1).jpg" alt="Quantum Era Introduction">
                     </div>
                     <div class="slide-1-text">
                         <h3>ਕੁਆਂਟਮ ਯੁਗ ਕੀ ਹੈ?</h3>
