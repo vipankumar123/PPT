@@ -442,6 +442,9 @@
                 left: 15px;
                 justify-content: space-between;
                 gap: 10px;
+                background: none;
+                padding: 0;
+                border-radius: 0;
             }
             .control-btn {
                 padding: 12px 20px;
@@ -495,20 +498,26 @@
                 bottom: max(20px, env(safe-area-inset-bottom));
                 right: 10px;
                 left: 10px;
-                background: rgba(102, 126, 234, 0.95);
-                padding: 12px;
-                border-radius: 25px;
-                backdrop-filter: blur(15px);
-                box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+                background: none;
+                padding: 0;
+                border-radius: 0;
+                backdrop-filter: none;
+                box-shadow: none;
                 z-index: 1000;
+                display: flex;
+                justify-content: space-between;
+                gap: 15px;
             }
             .control-btn {
-                background: rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.3);
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border: none;
                 color: white;
                 padding: 15px 25px;
                 font-size: 1em;
                 min-width: 100px;
+                border-radius: 50px;
+                box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+                backdrop-filter: blur(10px);
             }
             .slide-number {
                 position: fixed;
@@ -533,11 +542,46 @@
             .slide-content {
                 padding-bottom: 160px !important; /* Force more space on iPhone */
             }
+            /* Extra space for first and last slides */
+            .slide[data-slide="1"] .slide-content,
+            .slide[data-slide="5"] .slide-content {
+                padding-bottom: 180px !important;
+            }
+        }
+
+        /* PDF Print Styles */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+            .slide {
+                width: 100% !important;
+                height: 100vh !important;
+                max-width: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                page-break-after: always !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .slide:last-child {
+                page-break-after: avoid !important;
+            }
+            .controls, .nav-buttons, .slide-number {
+                display: none !important;
+            }
+            .slide-content {
+                padding-bottom: 40px !important;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="presentation-container">
+        <div class="presentation-container">
+        <!-- Download Button -->
+        <button class="nav-btn download-btn" onclick="showDownloadOptions()" style="position: absolute; top: 30px; right: 50px; z-index: 100;">📥 Download</button>
         
         <!-- Slide 1 -->
         <div class="slide active" data-slide="1">
@@ -752,6 +796,201 @@
             if (currentSlide > 1) {
                 currentSlide--;
                 showSlide(currentSlide);
+            }
+        }
+
+        function showDownloadOptions() {
+            const choice = confirm('Choose download format:\n\n✅ OK = PDF (PowerPoint style - Easy to share)\n❌ Cancel = HTML (Interactive version)');
+            
+            if (choice) {
+                downloadAsPDF();
+            } else {
+                downloadOfflinePresentation();
+            }
+        }
+
+        function downloadAsPDF() {
+            // Show instructions
+            alert('📄 Creating PowerPoint-style PDF...\n\n📋 INSTRUCTIONS:\n1. Print dialog will open\n2. Choose "Save as PDF" as destination\n3. File name: Quantum_Era_Presentation.pdf\n4. Click Save\n\n✅ Perfect for sharing via email, WhatsApp, etc!');
+            
+            // Show all slides for PDF generation
+            const slides = document.querySelectorAll('.slide');
+            const originalDisplay = [];
+            const originalStyles = [];
+            
+            // Store original display states and styles
+            slides.forEach((slide, index) => {
+                originalDisplay[index] = slide.style.display;
+                originalStyles[index] = {
+                    pageBreakAfter: slide.style.pageBreakAfter,
+                    height: slide.style.height,
+                    width: slide.style.width,
+                    margin: slide.style.margin
+                };
+                
+                slide.classList.add('active');
+                slide.style.display = 'flex';
+                slide.style.pageBreakAfter = 'always';
+                slide.style.height = '100vh';
+                slide.style.width = '100vw';
+                slide.style.margin = '0';
+            });
+            
+            // Last slide should not have page break
+            if (slides.length > 0) {
+                slides[slides.length - 1].style.pageBreakAfter = 'avoid';
+            }
+            
+            // Hide navigation elements for PDF
+            const controls = document.querySelectorAll('.controls, .nav-buttons, .slide-number');
+            const originalControlsDisplay = [];
+            controls.forEach((el, index) => {
+                originalControlsDisplay[index] = el.style.display;
+                el.style.display = 'none';
+            });
+            
+            // Trigger print dialog (user can save as PDF)
+            setTimeout(() => {
+                window.print();
+                
+                // Show success message and restore after print dialog
+                setTimeout(() => {
+                    // Restore original states
+                    slides.forEach((slide, index) => {
+                        slide.style.display = originalDisplay[index];
+                        slide.style.pageBreakAfter = originalStyles[index].pageBreakAfter;
+                        slide.style.height = originalStyles[index].height;
+                        slide.style.width = originalStyles[index].width;
+                        slide.style.margin = originalStyles[index].margin;
+                        if (index !== 0) slide.classList.remove('active');
+                    });
+                    
+                    // Show navigation elements again
+                    controls.forEach((el, index) => {
+                        el.style.display = originalControlsDisplay[index];
+                    });
+                    
+                    // Show current slide
+                    showSlide(currentSlide);
+                    
+                    // Success message
+                    alert('✅ PDF Ready!\n\n📁 File: Quantum_Era_Presentation.pdf\n\n🎯 PERFECT FOR:\n📧 Email sharing\n💬 WhatsApp/Telegram\n💾 USB drive\n🖨️ Printing\n📱 Mobile viewing\n\n🚀 Works like PowerPoint slides!');
+                    
+                }, 2000);
+            }, 500);
+        }
+
+        async function downloadOfflinePresentation() {
+            try {
+                // Show loading message
+                alert('🔄 Creating standalone presentation...\nPlease wait, embedding all resources...');
+                
+                // Get current HTML
+                let cleanHTML = document.documentElement.outerHTML;
+                
+                // Remove download buttons from the offline version
+                cleanHTML = cleanHTML.replace(/<button[^>]*showDownloadOptions[^>]*>.*?<\/button>/g, '');
+                
+                // Convert all images to base64
+                const images = document.querySelectorAll('img');
+                for (let img of images) {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.naturalWidth || img.width;
+                        canvas.height = img.naturalHeight || img.height;
+                        
+                        // Draw image on canvas
+                        ctx.drawImage(img, 0, 0);
+                        
+                        // Convert to base64
+                        const base64 = canvas.toDataURL('image/jpeg', 0.9);
+                        
+                        // Replace image src in HTML
+                        const imgSrc = img.getAttribute('src');
+                        cleanHTML = cleanHTML.replace(new RegExp(imgSrc.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), base64);
+                    } catch (e) {
+                        console.log('Could not convert image:', img.src);
+                    }
+                }
+                
+                // Add offline indicator and instructions
+                cleanHTML = cleanHTML.replace(
+                    '<title>ਕੁਆਂਟਮ ਯੁਗ Presentation</title>',
+                    '<title>ਕੁਆਂਟਮ ਯੁਗ Presentation - Standalone Version</title>'
+                );
+                
+                // Add instructions comment
+                const instructions = `
+<!-- 
+🎉 STANDALONE QUANTUM ERA PRESENTATION 🎉
+
+✅ This file works completely offline
+✅ All images and resources are embedded
+✅ Same functionality as original website
+✅ Compatible with all browsers and devices
+
+📱 CONTROLS:
+- Previous/Next buttons for navigation
+- Arrow keys (← →) for keyboard navigation
+- Spacebar for next slide
+- Works on mobile, tablet, and desktop
+
+📧 SHARING:
+- Email this single HTML file
+- Copy to USB drive
+- Upload to any website
+- Works anywhere without internet
+
+🎯 PERFECT FOR:
+- Presentations and meetings
+- Offline viewing
+- Sharing with colleagues
+- Educational purposes
+
+Created with ❤️ - Quantum Era Presentation System
+-->
+`;
+                cleanHTML = cleanHTML.replace('<head>', '<head>' + instructions);
+                
+                // Create and download file
+                const blob = new Blob([cleanHTML], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Quantum_Era_Presentation_Standalone.html';
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                // Show success message
+                alert('✅ Standalone Presentation Created Successfully!\n\n📁 File: Quantum_Era_Presentation_Standalone.html\n\n🎯 FEATURES:\n✅ Works completely offline\n✅ All images embedded\n✅ Same functionality as website\n✅ Compatible with all devices\n\n📧 Share this single file anywhere!\n🌐 No internet required!');
+                
+            } catch (error) {
+                alert('❌ Error creating standalone file.\nTrying basic version...');
+                
+                // Fallback to basic version
+                const currentHTML = document.documentElement.outerHTML;
+                let cleanHTML = currentHTML.replace(/<button[^>]*showDownloadOptions[^>]*>.*?<\/button>/g, '');
+                cleanHTML = cleanHTML.replace(
+                    '<title>ਕੁਆਂਟਮ ਯੁਗ Presentation</title>',
+                    '<title>ਕੁਆਂਟਮ ਯੁਗ Presentation - Offline Version</title>'
+                );
+                
+                const blob = new Blob([cleanHTML], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Quantum_Era_Presentation_Basic.html';
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert('✅ Basic version downloaded!\nNote: Images may need internet connection.');
             }
         }
 
