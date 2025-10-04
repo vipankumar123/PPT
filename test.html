@@ -1,0 +1,752 @@
+
+<!DOCTYPE html>
+<html lang="pa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ਕੁਆਂਟਮ ਯੁਗ Presentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            width: 95%;
+            max-width: 1400px;
+            height: 90vh;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                width: 98%;
+                height: 95vh;
+                border-radius: 10px;
+            }
+        }
+
+        .slide.active {
+            display: flex;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 50px;
+            text-align: center;
+        }
+
+        .slide-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide-header h2 {
+            font-size: 1.8em;
+            font-weight: 300;
+        }
+
+        .slide-content {
+            flex: 1;
+            padding: 40px 60px;
+            overflow-y: auto;
+        }
+
+        .slide-1-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .slide-1-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-1-image img {
+            max-width: 100%;
+            max-height: 500px;
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .slide-1-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .slide-1-image img {
+                max-height: 250px;
+            }
+            .principle-card img {
+                height: 80px;
+            }
+            .possibility-card img, .challenge-card img {
+                height: 100px;
+            }
+            .conclusion-image img {
+                max-height: 300px;
+            }
+        }
+
+        .slide-1-text {
+            flex: 1;
+        }
+
+        .slide-1-text h3 {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .slide-1-text p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .principles-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .principle-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .principle-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .principle-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+        }
+
+        .principle-card h4 {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .principle-card p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .possibilities-grid, .challenges-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .possibilities-grid, .challenges-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        .possibility-card, .challenge-card {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .possibility-card:hover, .challenge-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .possibility-card img, .challenge-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+        }
+
+        .possibility-card h4, .challenge-card h4 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .possibility-card p, .challenge-card p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        .conclusion-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            height: 100%;
+        }
+
+        .conclusion-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .conclusion-image img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            object-fit: contain;
+            background: #f8f9fa;
+        }
+
+        .conclusion-text {
+            flex: 1;
+        }
+
+        .conclusion-text h3 {
+            font-size: 2.2em;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        .conclusion-point {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 18px;
+            margin-bottom: 18px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .download-btn {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .download-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .control-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .control-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .slide-header {
+                padding: 20px 30px;
+            }
+            .slide-header h1 {
+                font-size: 2em;
+            }
+            .slide-header h2 {
+                font-size: 1.5em;
+            }
+            .slide-content {
+                padding: 20px 30px;
+            }
+            .slide-1-text h3 {
+                font-size: 1.5em;
+            }
+            .slide-1-text p {
+                font-size: 1em;
+            }
+            .principle-card, .possibility-card, .challenge-card {
+                padding: 15px;
+            }
+            .principle-card h4, .possibility-card h4, .challenge-card h4 {
+                font-size: 1.1em;
+            }
+            .principle-card p, .possibility-card p, .challenge-card p {
+                font-size: 0.9em;
+            }
+            .conclusion-text h3 {
+                font-size: 1.8em;
+            }
+            .conclusion-point {
+                font-size: 1em;
+                padding: 15px;
+            }
+            .controls {
+                bottom: 20px;
+                right: 30px;
+                gap: 10px;
+            }
+            .control-btn {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+            .slide-number {
+                bottom: 20px;
+                left: 30px;
+                padding: 8px 15px;
+                font-size: 1em;
+            }
+            .download-btn {
+                top: 20px;
+                right: 30px;
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .download-btn {
+                top: 15px;
+                right: 20px;
+                padding: 8px 15px;
+                font-size: 0.8em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+            }
+            .slide-header {
+                padding: 15px 20px;
+            }
+            .slide-content {
+                padding: 15px 20px;
+            }
+            .slide-1-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .conclusion-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Download Button -->
+        <button class="download-btn" id="downloadBtn">📥 Download Presentation</button>
+        
+        <!-- Slide 1 -->
+        <div class="slide active" data-slide="1">
+            <div class="slide-header">
+                <h1>ਕੁਆਂਟਮ ਯੁਗ</h1>
+                <h2>Quantum Era</h2>
+            </div>
+            <div class="slide-content">
+                <div class="slide-1-content">
+                    <div class="slide-1-image">
+                        <img src="images/slide1(1).jpg" alt="Quantum Era Introduction">
+                    </div>
+                    <div class="slide-1-text">
+                        <h3>ਕੁਆਂਟਮ ਯੁਗ ਕੀ ਹੈ?</h3>
+                        <p>ਕੁਆਂਟਮ (Quantum) ਭੌਤਿਕ ਵਿਗਿਆਨ ਅਤੇ ਤਕਨਾਲੋਜੀ ਦਾ ਇੱਕ ਨਵਾਂ ਦੌਰ ਹੈ ਜੋ ਪਰਮਾਣੂ ਅਤੇ ਉਪ-ਪਰਮਾਣੂ ਕਣਾਂ ਦੇ ਵਿਹਾਰ ਅਤੇ ਗੁਣਾਂ ਦੇ ਅਧਾਰ 'ਤੇ ਆਧਾਰਿਤ ਹੈ। ਇਸ ਵਿੱਚ binary (0,1) ਬਿਟ ਦੇ ਬਜਾਏ ਕੁਆਂਟਮ ਬਿਟ (ਕੁਬਿਟ) ਵਰਤੇ ਜਾਂਦੇ ਹਨ।</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">1 / 5</div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn" disabled>◀ ਪਿਛਲਾ</button>
+                <button class="control-btn" id="nextBtn">ਅਗਲਾ ▶</button>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <h1>ਕੁਆਂਟਮ ਯੁਗ ਦੇ ਸਿਧਾਂਤ</h1>
+            </div>
+            <div class="slide-content">
+                <div class="principles-grid">
+                    <div class="principle-card">
+                        <img src="images/slide2(1).jpg" alt="Superposition">
+                        <h4>● ਸੁਪਰਪੋਜ਼ੀਸ਼ਨ (Superposition)</h4>
+                        <p>ਕੁਆਂਟਮ ਕਣ ਦਾ ਇੱਕੋ ਸਮੇਂ ਬਹੁਤੀਆਂ ਸਥਿਤੀਆਂ ਵਿੱਚ ਹੋਣਾ</p>
+                    </div>
+                    <div class="principle-card">
+                        <img src="images/slide2(2).jpg" alt="Entanglement">
+                        <h4>● ਐਂਟੈਂਗਲਮੈਂਟ (Entanglement)</h4>
+                        <p>ਇੱਕ ਕਣ ਦੀ ਸਥਿਤੀ ਨਾਲ ਦੂਜੇ ਦੀ ਸਥਿਤੀ ਦਾ ਤੁਰੰਤ ਪ੍ਰਭਾਵਿਤ ਹੋਣਾ</p>
+                    </div>
+                    <div class="principle-card">
+                        <img src="images/slide2(3).jpg" alt="Wave-Particle Duality">
+                        <h4>● ਤਰੰਗ-ਕਣ ਦੁਹਰਾਪਣ (Wave-Particle Duality)</h4>
+                        <p>ਕੁਆਂਟਮ ਕਣ ਦਾ ਕਦੇ ਤਰੰਗ ਵਾਂਗ ਤੇ ਕਦੇ ਕਣ ਵਾਂਗ ਵਰਤਾਰਾ</p>
+                    </div>
+                    <div class="principle-card">
+                        <img src="images/slide2(4).jpg" alt="Quantum Tunneling">
+                        <h4>● ਕੁਆਂਟਮ ਟਨਲਿੰਗ</h4>
+                        <p>ਕੁਆਂਟਮ ਕਣਾਂ ਦੁਆਰਾ ਅਸੰਭਵ ਰੁਕਾਵਟਾਂ ਨੂੰ ਪਾਰ ਕਰਨਾ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">2 / 5</div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn2">◀ ਪਿਛਲਾ</button>
+                <button class="control-btn" id="nextBtn2">ਅਗਲਾ ▶</button>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header">
+                <h1>ਕੁਆਂਟਮ ਯੁਗ ਦੀਆਂ ਮੁੱਖ ਸੰਭਾਵਨਾਵਾਂ</h1>
+            </div>
+            <div class="slide-content">
+                <div class="possibilities-grid">
+                    <div class="possibility-card">
+                        <img src="images/slide3(1).jpg" alt="Quantum Computing">
+                        <h4>● ਤਾਕਤਵਰ ਕੰਪਿਊਟਿੰਗ</h4>
+                        <p>ਜਟਿਲ ਗਣਿਤਿਕ ਸਮੱਸਿਆਵਾਂ ਦਾ ਹੱਲ, ਦਵਾਈਆਂ ਦੀ ਖੋਜ, ਨਵੀਂ ਸਮੱਗਰੀ ਦੀ ਰਚਨਾ</p>
+                    </div>
+                    <div class="possibility-card">
+                        <img src="images/slide3(2).jpg" alt="Security">
+                        <h4>● ਅਟੁੱਟ ਸੁਰੱਖਿਆ</h4>
+                        <p>ਭਰੋਸੇਮੰਦ ਅਤੇ ਹੈਕ ਨਾ ਹੋਣ ਵਾਲਾ ਸੰਚਾਰ</p>
+                    </div>
+                    <div class="possibility-card">
+                        <img src="images/slide3(3).jpg" alt="Climate">
+                        <h4>● ਮੌਸਮ ਤੇ ਵਾਤਾਵਰਣ</h4>
+                        <p>ਜਲਵਾਯੂ ਪਰਿਵਰਤਨ ਦੀ ਭਵਿੱਖਬਾਣੀ, ਸਾਫ਼ ਊਰਜਾ ਵਿਕਾਸ</p>
+                    </div>
+                    <div class="possibility-card">
+                        <img src="images/slide3(4).jpg" alt="Research">
+                        <h4>● ਰਾਸ਼ਟਰੀ ਸੁਰੱਖਿਆ</h4>
+                        <p>ਗੁਪਤ ਸੰਚਾਰ, ਤੇਜ਼ ਡਾਟਾ ਵਿਸ਼ਲੇਸ਼ਣ ਅਤੇ ਰੱਖਿਆ ਤਕਨੀਕਾਂ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">3 / 5</div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn3">◀ ਪਿਛਲਾ</button>
+                <button class="control-btn" id="nextBtn3">ਅਗਲਾ ▶</button>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header">
+                <h1>ਚੁਣੌਤੀਆਂ ਅਤੇ ਮੁਸ਼ਕਲਾਂ</h1>
+            </div>
+            <div class="slide-content">
+                <div class="challenges-grid">
+                    <div class="challenge-card">
+                        <img src="images/slide4(1).jpg" alt="Expert Shortage">
+                        <h4>● ਮਾਹਿਰਾਂ ਦੀ ਘਾਟ</h4>
+                        <p>ਆਮ ਲੋਕਾਂ ਲਈ ਅਜੇ ਵਰਤੋਂ ਮੁਸ਼ਕਿਲ</p>
+                    </div>
+                    <div class="challenge-card">
+                        <img src="images/slide4(2).jpg" alt="Error Possibility">
+                        <h4>● ਗਲਤੀਆਂ ਦੀ ਸੰਭਾਵਨਾ</h4>
+                        <p>ਕੁਆਂਟਮ ਕੰਪਿਊਟਰਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਦਾ ਖਤਰਾ</p>
+                    </div>
+                    <div class="challenge-card">
+                        <img src="images/slide4(3).jpg" alt="High Cost">
+                        <h4>● ਉੱਚ ਲਾਗਤ</h4>
+                        <p>ਕੁਆਂਟਮ ਤਕਨਾਲੋਜੀ ਬਹੁਤ ਮਹਿੰਗੀ ਹੈ</p>
+                    </div>
+                    <div class="challenge-card">
+                        <img src="images/slide4(4).jpg" alt="Instability">
+                        <h4>● ਅਸਥਿਰਤਾ</h4>
+                        <p>ਕੁਆਂਟਮ ਸਥਿਤੀ ਨੂੰ ਬਣਾਈ ਰੱਖਣਾ ਮੁਸ਼ਕਿਲ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">4 / 5</div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn4">◀ ਪਿਛਲਾ</button>
+                <button class="control-btn" id="nextBtn4">ਅਗਲਾ ▶</button>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header">
+                <h1>ਸਿੱਟਾ</h1>
+            </div>
+            <div class="slide-content">
+                <div class="conclusion-content">
+                    <div class="conclusion-image">
+                        <img src="images/slide5(1).jpg" alt="Quantum Future">
+                    </div>
+                    <div class="conclusion-text">
+                        <h3>ਕੁਆਂਟਮ ਯੁਗ ਦਾ ਭਵਿੱਖ</h3>
+                        <div class="conclusion-point">
+                            ਕੁਆਂਟਮ ਤਕਨਾਲੋਜੀ ਭਵਿੱਖ ਦੀ ਤਕਨਾਲੋਜੀ ਹੈ
+                        </div>
+                        <div class="conclusion-point">
+                            ਇਸ ਨਾਲ ਸਾਡੀ ਜ਼ਿੰਦਗੀ ਵਿੱਚ ਵੱਡੇ ਬਦਲਾਅ ਆਉਣਗੇ
+                        </div>
+                        <div class="conclusion-point">
+                            ਸਾਨੂੰ ਇਸ ਲਈ ਤਿਆਰ ਹੋਣਾ ਪਵੇਗਾ
+                        </div>
+                        <div class="conclusion-point">
+                            ਇਹ ਸਾਡੇ ਲਈ ਨਵੇਂ ਮੌਕੇ ਲਿਆਵੇਗਾ
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">5 / 5</div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn5">◀ ਪਿਛਲਾ</button>
+                <button class="control-btn" id="nextBtn5" disabled>ਅਗਲਾ ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 5;
+
+        function showSlide(slideNumber) {
+            // Hide all slides
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Show current slide
+            const currentSlideElement = document.querySelector('[data-slide="' + slideNumber + '"]');
+            if (currentSlideElement) {
+                currentSlideElement.classList.add('active');
+            }
+
+            // Update button states
+            updateButtonStates(slideNumber);
+        }
+
+        function updateButtonStates(slideNumber) {
+            // Update previous buttons
+            const prevButtons = document.querySelectorAll('[id^="prevBtn"]');
+            prevButtons.forEach(btn => {
+                btn.disabled = slideNumber === 1;
+            });
+
+            // Update next buttons
+            const nextButtons = document.querySelectorAll('[id^="nextBtn"]');
+            nextButtons.forEach(btn => {
+                btn.disabled = slideNumber === totalSlides;
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function downloadPresentation() {
+            // Create a new window with the presentation
+            const printWindow = window.open('', '_blank');
+            const currentHTML = document.documentElement.outerHTML;
+            
+            // Create a clean version for printing/downloading but keep navigation
+            const cleanHTML = currentHTML.replace(/<button class="download-btn"[^>]*>.*?<\/button>/g, '');
+            
+            printWindow.document.write('<!DOCTYPE html><html lang="pa"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ਕੁਆਂਟਮ ਯੁਗ Presentation - Download</title></head><body>' + cleanHTML + '</body></html>');
+            
+            printWindow.document.close();
+            
+            // Show all slides for printing
+            setTimeout(() => {
+                const slides = printWindow.document.querySelectorAll('.slide');
+                slides.forEach(slide => {
+                    slide.classList.add('active');
+                    slide.style.display = 'flex';
+                });
+                
+                // Trigger print dialog
+                printWindow.print();
+            }, 1000);
+        }
+
+        function downloadAsHTML() {
+            const currentHTML = document.documentElement.outerHTML;
+            const cleanHTML = currentHTML.replace(/<button class="download-btn"[^>]*>.*?<\/button>/g, '');
+            
+            const blob = new Blob([cleanHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'quantum_era_presentation.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Add event listeners to all navigation buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Next buttons
+            const nextButtons = document.querySelectorAll('[id^="nextBtn"]');
+            nextButtons.forEach(btn => {
+                btn.addEventListener('click', nextSlide);
+            });
+
+            // Previous buttons
+            const prevButtons = document.querySelectorAll('[id^="prevBtn"]');
+            prevButtons.forEach(btn => {
+                btn.addEventListener('click', prevSlide);
+            });
+
+            // Download button
+            const downloadBtn = document.getElementById('downloadBtn');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function() {
+                    // Show download options
+                    const choice = confirm('Choose download option:\n\nOK = Print/PDF (High Quality)\nCancel = Download HTML File');
+                    if (choice) {
+                        downloadPresentation();
+                    } else {
+                        downloadAsHTML();
+                    }
+                });
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'd' || e.key === 'D') {
+                    downloadPresentation();
+                }
+            });
+
+            // Initialize first slide
+            showSlide(1);
+        });
+    </script>
+</body>
+</html>
+                
