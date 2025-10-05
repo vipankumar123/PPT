@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Era Presentation Downloader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .downloader-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        .logo {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            margin: 10px;
+            min-width: 200px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+        
+        .download-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .info {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: left;
+        }
+        
+        .info h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .info ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .info li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #555;
+        }
+        
+        .info li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        @media (max-width: 600px) {
+            .downloader-container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .download-btn {
+                padding: 15px 30px;
+                font-size: 1.1em;
+                min-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="downloader-container">
+        <div class="logo">🎯</div>
+        <h1>Quantum Era Presentation</h1>
+        <h2>Professional Presentation Downloader</h2>
+        
+        <button class="download-btn" onclick="downloadStandalonePresentation()">
+            📥 Download Complete Presentation
+        </button>
+        
+        <button class="download-btn" onclick="downloadBasicVersion()" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
+            💾 Download Basic Version
+        </button>
+        
+        <div class="info">
+            <h3>📋 What You'll Get:</h3>
+            <ul>
+                <li>Complete offline presentation</li>
+                <li>All 5 slides with images</li>
+                <li>Works without internet</li>
+                <li>Mobile & desktop compatible</li>
+                <li>Professional PowerPoint-style</li>
+                <li>Easy to share via email/USB</li>
+            </ul>
+        </div>
+        
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.textContent = message;
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        async function downloadStandalonePresentation() {
+            try {
+                showStatus('🔄 Creating complete presentation... Please wait...', 'success');
+                
+                // Create the complete HTML content
+                const htmlContent = `<!DOCTYPE html>
+<html lang="pa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ਕੁਆਂਟਮ ਯੁਗ Presentation - Standalone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            width: 95%;
+            max-width: 1400px;
+            height: 90vh;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            display: flex;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 50px;
+            text-align: center;
+        }
+
+        .slide-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .slide-header h2 {
+            font-size: 1.8em;
+            font-weight: 300;
+            line-height: 1.3;
+        }
+
+        .slide-content {
+            flex: 1;
+            padding: 40px 60px;
+            padding-bottom: 100px;
+            overflow-y: auto;
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            right: 50px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .control-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .control-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                width: 98%;
+                height: 95vh;
+            }
+            
+            .slide-header {
+                padding: 20px 15px;
+            }
+            
+            .slide-header h1 {
+                font-size: 1.8em;
+            }
+            
+            .slide-header h2 {
+                font-size: 1.3em;
+            }
+            
+            .slide-content {
+                padding: 20px 30px;
+                padding-bottom: 120px;
+            }
+            
+            .controls {
+                bottom: 20px;
+                right: 30px;
+                gap: 10px;
+            }
+            
+            .control-btn {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+            
+            .slide-number {
+                bottom: 20px;
+                left: 30px;
+                padding: 8px 15px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                width: 100%;
+                height: 100vh;
+                border-radius: 0;
+            }
+            
+            .slide-header {
+                padding: 15px 10px;
+            }
+            
+            .slide-header h1 {
+                font-size: 1.5em;
+                line-height: 1.1;
+            }
+            
+            .slide-header h2 {
+                font-size: 1.1em;
+            }
+            
+            .slide-content {
+                padding: 15px 20px;
+                padding-bottom: 140px;
+            }
+            
+            .controls {
+                bottom: 15px;
+                right: 15px;
+                left: 15px;
+                justify-content: space-between;
+            }
+            
+            .control-btn {
+                padding: 12px 20px;
+                font-size: 0.9em;
+                min-width: 120px;
+            }
+            
+            .slide-number {
+                bottom: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1 -->
+        <div class="slide active" data-slide="1">
+            <div class="slide-header">
+                <h1>ਕੁਆਂਟਮ ਯੁਗ</h1>
+                <h2>Quantum Era</h2>
+            </div>
+            <div class="slide-content">
+                <div style="display: flex; align-items: center; gap: 40px;">
+                    <div style="flex: 1; display: flex; justify-content: center;">
+                        <div style="width: 100%; height: 300px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em;">
+                            🌌 Quantum Image
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 2em; color: #667eea; margin-bottom: 20px;">ਕੁਆਂਟਮ ਯੁਗ ਕੀ ਹੈ?</h3>
+                        <p style="font-size: 1.2em; line-height: 1.8; color: #444;">ਕੁਆਂਟਮ (Quantum) ਭੌਤਿਕ ਵਿਗਿਆਨ ਅਤੇ ਤਕਨਾਲੋਜੀ ਦਾ ਇੱਕ ਨਵਾਂ ਦੌਰ ਹੈ ਜੋ ਪਰਮਾਣੂ ਅਤੇ ਉਪ-ਪਰਮਾਣੂ ਕਣਾਂ ਦੇ ਵਿਹਾਰ ਅਤੇ ਗੁਣਾਂ ਦੇ ਅਧਾਰ 'ਤੇ ਆਧਾਰਿਤ ਹੈ। ਇਸ ਵਿੱਚ binary (0,1) ਬਿਟ ਦੇ ਬਜਾਏ ਕੁਆਂਟਮ ਬਿਟ (ਕੁਬਿਟ) ਵਰਤੇ ਜਾਂਦੇ ਹਨ।</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">1 / 5</div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn" disabled>◀ ਪਿਛਲਾ</button>
+                <button class="control-btn" id="nextBtn">ਅਗਲਾ ▶</button>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header">
+                <h1>ਕੁਆਂਟਮ ਯੁਗ ਦੇ ਸਿਧਾਂਤ</h1>
+            </div>
+            <div class="slide-content">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;">
+                    <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 25px; border-radius: 15px; text-align: center;">
+                        <div style="width: 100%; height: 100px; background: #667eea; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">⚛️</div>
+                        <h4 style="color: #667eea; font-size: 1.2em; margin-bottom: 10px;">● ਸੁਪਰਪੋਜ਼ੀਸ਼ਨ (Superposition)</h4>
+                        <p style="color: #555;">ਕੁਆਂਟਮ ਕਣ ਦਾ ਇੱਕੋ ਸਮੇਂ ਬਹੁਤੀਆਂ ਸਥਿਤੀਆਂ ਵਿੱਚ ਹੋਣਾ</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 25px; border-radius: 15px; text-align: center;">
+                        <div style="width: 100%; height: 100px; background: #764ba2; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">🔗</div>
+                        <h4 style="color: #667eea; font-size: 1.2em; margin-bottom: 10px;">● ਐਂਟੈਂਗਲਮੈਂਟ (Entanglement)</h4>
+                        <p style="color: #555;">ਇੱਕ ਕਣ ਦੀ ਸਥਿਤੀ ਨਾਲ ਦੂਜੇ ਦੀ ਸਥਿਤੀ ਦਾ ਤੁਰੰਤ ਪ੍ਰਭਾਵਿਤ ਹੋਣਾ</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 25px; border-radius: 15px; text-align: center;">
+                        <div style="width: 100%; height: 100px; background: #667eea; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">〰️</div>
+                        <h4 style="color: #667eea; font-size: 1.2em; margin-bottom: 10px;">● ਤਰੰਗ-ਕਣ ਦੁਹਰਾਪਣ (Wave-Particle Duality)</h4>
+                        <p style="color: #555;">ਕੁਆਂਟਮ ਕਣ ਦਾ ਕਦੇ ਤਰੰਗ ਵਾਂਗ ਤੇ ਕਦੇ ਕਣ ਵਾਂਗ ਵਰਤਾਰਾ</p>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 25px; border-radius: 15px; text-align: center;">
+                        <div style="width: 100%; height: 100px; background: #764ba2; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em;">🚇</div>
+                        <h4 style="color: #667eea; font-size: 1.2em; margin-bottom: 10px;">● ਕੁਆਂਟਮ ਟਨਲਿੰਗ</h4>
+                        <p style="color: #555;">ਕੁਆਂਟਮ ਕਣਾਂ ਦੁਆਰਾ ਅਸੰਭਵ ਰੁਕਾਵਟਾਂ ਨੂੰ ਪਾਰ ਕਰਨਾ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">2 / 5</div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn2">◀ ਪਿਛਲਾ</button>
+                <button class="control-btn" id="nextBtn2">ਅਗਲਾ ▶</button>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header">
+                <h1>ਕੁਆਂਟਮ ਯੁਗ ਦੀਆਂ ਮੁੱਖ ਸੰਭਾਵਨਾਵਾਂ</h1>
+            </div>
+            <div class="slide-content">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+                    <div style="background: white; border: 3px solid #667eea; border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="width: 100%; height: 120px; background: #667eea; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em;">💻</div>
+                        <h4 style="color: #667eea; font-size: 1.3em; margin-bottom: 10px;">● ਤਾਕਤਵਰ ਕੰਪਿਊਟਿੰਗ</h4>
+                        <p style="color: #555;">ਜਟਿਲ ਗਣਿਤਿਕ ਸਮੱਸਿਆਵਾਂ ਦਾ ਹੱਲ, ਦਵਾਈਆਂ ਦੀ ਖੋਜ, ਨਵੀਂ ਸਮੱਗਰੀ ਦੀ ਰਚਨਾ</p>
+                    </div>
+                    <div style="background: white; border: 3px solid #667eea; border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="width: 100%; height: 120px; background: #764ba2; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em;">🔒</div>
+                        <h4 style="color: #667eea; font-size: 1.3em; margin-bottom: 10px;">● ਅਟੁੱਟ ਸੁਰੱਖਿਆ</h4>
+                        <p style="color: #555;">ਭਰੋਸੇਮੰਦ ਅਤੇ ਹੈਕ ਨਾ ਹੋਣ ਵਾਲਾ ਸੰਚਾਰ</p>
+                    </div>
+                    <div style="background: white; border: 3px solid #667eea; border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="width: 100%; height: 120px; background: #667eea; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em;">🌍</div>
+                        <h4 style="color: #667eea; font-size: 1.3em; margin-bottom: 10px;">● ਮੌਸਮ ਤੇ ਵਾਤਾਵਰਣ</h4>
+                        <p style="color: #555;">ਜਲਵਾਯੂ ਪਰਿਵਰਤਨ ਦੀ ਭਵਿੱਖਬਾਣੀ, ਸਾਫ਼ ਊਰਜਾ ਵਿਕਾਸ</p>
+                    </div>
+                    <div style="background: white; border: 3px solid #667eea; border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="width: 100%; height: 120px; background: #764ba2; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em;">🛡️</div>
+                        <h4 style="color: #667eea; font-size: 1.3em; margin-bottom: 10px;">● ਰਾਸ਼ਟਰੀ ਸੁਰੱਖਿਆ</h4>
+                        <p style="color: #555;">ਗੁਪਤ ਸੰਚਾਰ, ਤੇਜ਼ ਡਾਟਾ ਵਿਸ਼ਲੇਸ਼ਣ ਅਤੇ ਰੱਖਿਆ ਤਕਨੀਕਾਂ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">3 / 5</div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn3">◀ ਪਿਛਲਾ</button>
+                <button class="control-btn" id="nextBtn3">ਅਗਲਾ ▶</button>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header">
+                <h1>ਚੁਣੌਤੀਆਂ ਅਤੇ ਮੁਸ਼ਕਲਾਂ</h1>
+            </div>
+            <div class="slide-content">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+                    <div style="background: white; border: 3px solid #667eea; border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="width: 100%; height: 120px; background: #dc3545; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em;">👨‍🎓</div>
+                        <h4 style="color: #667eea; font-size: 1.3em; margin-bottom: 10px;">● ਮਾਹਿਰਾਂ ਦੀ ਘਾਟ</h4>
+                        <p style="color: #555;">ਆਮ ਲੋਕਾਂ ਲਈ ਅਜੇ ਵਰਤੋਂ ਮੁਸ਼ਕਿਲ</p>
+                    </div>
+                    <div style="background: white; border: 3px solid #667eea; border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="width: 100%; height: 120px; background: #ffc107; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em;">⚠️</div>
+                        <h4 style="color: #667eea; font-size: 1.3em; margin-bottom: 10px;">● ਗਲਤੀਆਂ ਦੀ ਸੰਭਾਵਨਾ</h4>
+                        <p style="color: #555;">ਕੁਆਂਟਮ ਕੰਪਿਊਟਰਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਦਾ ਖਤਰਾ</p>
+                    </div>
+                    <div style="background: white; border: 3px solid #667eea; border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="width: 100%; height: 120px; background: #fd7e14; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em;">💰</div>
+                        <h4 style="color: #667eea; font-size: 1.3em; margin-bottom: 10px;">● ਉੱਚ ਲਾਗਤ</h4>
+                        <p style="color: #555;">ਕੁਆਂਟਮ ਤਕਨਾਲੋਜੀ ਬਹੁਤ ਮਹਿੰਗੀ ਹੈ</p>
+                    </div>
+                    <div style="background: white; border: 3px solid #667eea; border-radius: 15px; padding: 20px; text-align: center;">
+                        <div style="width: 100%; height: 120px; background: #6f42c1; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 2em;">📊</div>
+                        <h4 style="color: #667eea; font-size: 1.3em; margin-bottom: 10px;">● ਅਸਥਿਰਤਾ</h4>
+                        <p style="color: #555;">ਕੁਆਂਟਮ ਸਥਿਤੀ ਨੂੰ ਬਣਾਈ ਰੱਖਣਾ ਮੁਸ਼ਕਿਲ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">4 / 5</div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn4">◀ ਪਿਛਲਾ</button>
+                <button class="control-btn" id="nextBtn4">ਅਗਲਾ ▶</button>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header">
+                <h1>ਸਿੱਟਾ</h1>
+            </div>
+            <div class="slide-content">
+                <div style="display: flex; align-items: center; gap: 40px; height: 100%;">
+                    <div style="flex: 1; display: flex; justify-content: center;">
+                        <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3em;">
+                            🚀
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3 style="font-size: 2.2em; color: #667eea; margin-bottom: 30px;">ਕੁਆਂਟਮ ਯੁਗ ਦਾ ਭਵਿੱਖ</h3>
+                        <div style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); padding: 18px; margin-bottom: 18px; border-radius: 10px; border-left: 5px solid #667eea; font-size: 1.2em; color: #333;">
+                            ਕੁਆਂਟਮ ਤਕਨਾਲੋਜੀ ਭਵਿੱਖ ਦੀ ਤਕਨਾਲੋਜੀ ਹੈ
+                        </div>
+                        <div style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); padding: 18px; margin-bottom: 18px; border-radius: 10px; border-left: 5px solid #667eea; font-size: 1.2em; color: #333;">
+                            ਇਸ ਨਾਲ ਸਾਡੀ ਜ਼ਿੰਦਗੀ ਵਿੱਚ ਵੱਡੇ ਬਦਲਾਅ ਆਉਣਗੇ
+                        </div>
+                        <div style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); padding: 18px; margin-bottom: 18px; border-radius: 10px; border-left: 5px solid #667eea; font-size: 1.2em; color: #333;">
+                            ਸਾਨੂੰ ਇਸ ਲਈ ਤਿਆਰ ਹੋਣਾ ਪਵੇਗਾ
+                        </div>
+                        <div style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); padding: 18px; margin-bottom: 18px; border-radius: 10px; border-left: 5px solid #667eea; font-size: 1.2em; color: #333;">
+                            ਇਹ ਸਾਡੇ ਲਈ ਨਵੇਂ ਮੌਕੇ ਲਿਆਵੇਗਾ
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">5 / 5</div>
+            <div class="controls">
+                <button class="control-btn" id="prevBtn5">◀ ਪਿਛਲਾ</button>
+                <button class="control-btn" id="nextBtn5" disabled>ਅਗਲਾ ▶</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 5;
+
+        function showSlide(slideNumber) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            const currentSlideElement = document.querySelector('[data-slide="' + slideNumber + '"]');
+            if (currentSlideElement) {
+                currentSlideElement.classList.add('active');
+            }
+
+            updateButtonStates(slideNumber);
+        }
+
+        function updateButtonStates(slideNumber) {
+            const prevButtons = document.querySelectorAll('[id^="prevBtn"]');
+            prevButtons.forEach(btn => {
+                btn.disabled = slideNumber === 1;
+            });
+
+            const nextButtons = document.querySelectorAll('[id^="nextBtn"]');
+            nextButtons.forEach(btn => {
+                btn.disabled = slideNumber === totalSlides;
+            });
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const nextButtons = document.querySelectorAll('[id^="nextBtn"]');
+            nextButtons.forEach(btn => {
+                btn.addEventListener('click', nextSlide);
+            });
+
+            const prevButtons = document.querySelectorAll('[id^="prevBtn"]');
+            prevButtons.forEach(btn => {
+                btn.addEventListener('click', prevSlide);
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight' || e.key === ' ') {
+                    nextSlide();
+                } else if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                }
+            });
+
+            showSlide(1);
+        });
+    </script>
+</body>
+</html>`;
+
+                // Create and download the file
+                const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Quantum_Era_Presentation_Complete.html';
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                showStatus('✅ Complete presentation downloaded successfully! File: Quantum_Era_Presentation_Complete.html', 'success');
+                
+            } catch (error) {
+                showStatus('❌ Error creating presentation file. Please try again.', 'error');
+                console.error('Download error:', error);
+            }
+        }
+
+        function downloadBasicVersion() {
+            try {
+                showStatus('🔄 Creating basic version...', 'success');
+                
+                const basicContent = \`<!DOCTYPE html>
+<html lang="pa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ਕੁਆਂਟਮ ਯੁਗ Presentation - Basic</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .slide { background: white; margin: 20px 0; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .slide-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; margin: -30px -30px 20px -30px; border-radius: 10px 10px 0 0; text-align: center; }
+        h1 { margin: 0; font-size: 2em; }
+        h2 { margin: 5px 0 0 0; font-weight: 300; }
+        h3 { color: #667eea; margin-bottom: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .card { background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 4px solid #667eea; }
+        .conclusion-point { background: #e3f2fd; padding: 15px; margin: 10px 0; border-radius: 8px; border-left: 4px solid #667eea; }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="slide-header">
+            <h1>ਕੁਆਂਟਮ ਯੁਗ</h1>
+            <h2>Quantum Era</h2>
+        </div>
+        <h3>ਕੁਆਂਟਮ ਯੁਗ ਕੀ ਹੈ?</h3>
+        <p>ਕੁਆਂਟਮ (Quantum) ਭੌਤਿਕ ਵਿਗਿਆਨ ਅਤੇ ਤਕਨਾਲੋਜੀ ਦਾ ਇੱਕ ਨਵਾਂ ਦੌਰ ਹੈ ਜੋ ਪਰਮਾਣੂ ਅਤੇ ਉਪ-ਪਰਮਾਣੂ ਕਣਾਂ ਦੇ ਵਿਹਾਰ ਅਤੇ ਗੁਣਾਂ ਦੇ ਅਧਾਰ 'ਤੇ ਆਧਾਰਿਤ ਹੈ।</p>
+    </div>
+
+    <div class="slide">
+        <div class="slide-header">
+            <h1>ਕੁਆਂਟਮ ਯੁਗ ਦੇ ਸਿਧਾਂਤ</h1>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h4>● ਸੁਪਰਪੋਜ਼ੀਸ਼ਨ (Superposition)</h4>
+                <p>ਕੁਆਂਟਮ ਕਣ ਦਾ ਇੱਕੋ ਸਮੇਂ ਬਹੁਤੀਆਂ ਸਥਿਤੀਆਂ ਵਿੱਚ ਹੋਣਾ</p>
+            </div>
+            <div class="card">
+                <h4>● ਐਂਟੈਂਗਲਮੈਂਟ (Entanglement)</h4>
+                <p>ਇੱਕ ਕਣ ਦੀ ਸਥਿਤੀ ਨਾਲ ਦੂਜੇ ਦੀ ਸਥਿਤੀ ਦਾ ਤੁਰੰਤ ਪ੍ਰਭਾਵਿਤ ਹੋਣਾ</p>
+            </div>
+            <div class="card">
+                <h4>● ਤਰੰਗ-ਕਣ ਦੁਹਰਾਪਣ (Wave-Particle Duality)</h4>
+                <p>ਕੁਆਂਟਮ ਕਣ ਦਾ ਕਦੇ ਤਰੰਗ ਵਾਂਗ ਤੇ ਕਦੇ ਕਣ ਵਾਂਗ ਵਰਤਾਰਾ</p>
+            </div>
+            <div class="card">
+                <h4>● ਕੁਆਂਟਮ ਟਨਲਿੰਗ</h4>
+                <p>ਕੁਆਂਟਮ ਕਣਾਂ ਦੁਆਰਾ ਅਸੰਭਵ ਰੁਕਾਵਟਾਂ ਨੂੰ ਪਾਰ ਕਰਨਾ</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-header">
+            <h1>ਕੁਆਂਟਮ ਯੁਗ ਦੀਆਂ ਮੁੱਖ ਸੰਭਾਵਨਾਵਾਂ</h1>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h4>● ਤਾਕਤਵਰ ਕੰਪਿਊਟਿੰਗ</h4>
+                <p>ਜਟਿਲ ਗਣਿਤਿਕ ਸਮੱਸਿਆਵਾਂ ਦਾ ਹੱਲ, ਦਵਾਈਆਂ ਦੀ ਖੋਜ, ਨਵੀਂ ਸਮੱਗਰੀ ਦੀ ਰਚਨਾ</p>
+            </div>
+            <div class="card">
+                <h4>● ਅਟੁੱਟ ਸੁਰੱਖਿਆ</h4>
+                <p>ਭਰੋਸੇਮੰਦ ਅਤੇ ਹੈਕ ਨਾ ਹੋਣ ਵਾਲਾ ਸੰਚਾਰ</p>
+            </div>
+            <div class="card">
+                <h4>● ਮੌਸਮ ਤੇ ਵਾਤਾਵਰਣ</h4>
+                <p>ਜਲਵਾਯੂ ਪਰਿਵਰਤਨ ਦੀ ਭਵਿੱਖਬਾਣੀ, ਸਾਫ਼ ਊਰਜਾ ਵਿਕਾਸ</p>
+            </div>
+            <div class="card">
+                <h4>● ਰਾਸ਼ਟਰੀ ਸੁਰੱਖਿਆ</h4>
+                <p>ਗੁਪਤ ਸੰਚਾਰ, ਤੇਜ਼ ਡਾਟਾ ਵਿਸ਼ਲੇਸ਼ਣ ਅਤੇ ਰੱਖਿਆ ਤਕਨੀਕਾਂ</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-header">
+            <h1>ਚੁਣੌਤੀਆਂ ਅਤੇ ਮੁਸ਼ਕਲਾਂ</h1>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h4>● ਮਾਹਿਰਾਂ ਦੀ ਘਾਟ</h4>
+                <p>ਆਮ ਲੋਕਾਂ ਲਈ ਅਜੇ ਵਰਤੋਂ ਮੁਸ਼ਕਿਲ</p>
+            </div>
+            <div class="card">
+                <h4>● ਗਲਤੀਆਂ ਦੀ ਸੰਭਾਵਨਾ</h4>
+                <p>ਕੁਆਂਟਮ ਕੰਪਿਊਟਰਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਦਾ ਖਤਰਾ</p>
+            </div>
+            <div class="card">
+                <h4>● ਉੱਚ ਲਾਗਤ</h4>
+                <p>ਕੁਆਂਟਮ ਤਕਨਾਲੋਜੀ ਬਹੁਤ ਮਹਿੰਗੀ ਹੈ</p>
+            </div>
+            <div class="card">
+                <h4>● ਅਸਥਿਰਤਾ</h4>
+                <p>ਕੁਆਂਟਮ ਸਥਿਤੀ ਨੂੰ ਬਣਾਈ ਰੱਖਣਾ ਮੁਸ਼ਕਿਲ</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-header">
+            <h1>ਸਿੱਟਾ</h1>
+        </div>
+        <h3>ਕੁਆਂਟਮ ਯੁਗ ਦਾ ਭਵਿੱਖ</h3>
+        <div class="conclusion-point">ਕੁਆਂਟਮ ਤਕਨਾਲੋਜੀ ਭਵਿੱਖ ਦੀ ਤਕਨਾਲੋਜੀ ਹੈ</div>
+        <div class="conclusion-point">ਇਸ ਨਾਲ ਸਾਡੀ ਜ਼ਿੰਦਗੀ ਵਿੱਚ ਵੱਡੇ ਬਦਲਾਅ ਆਉਣਗੇ</div>
+        <div class="conclusion-point">ਸਾਨੂੰ ਇਸ ਲਈ ਤਿਆਰ ਹੋਣਾ ਪਵੇਗਾ</div>
+        <div class="conclusion-point">ਇਹ ਸਾਡੇ ਲਈ ਨਵੇਂ ਮੌਕੇ ਲਿਆਵੇਗਾ</div>
+    </div>
+</body>
+</html>\`;
+
+                const blob = new Blob([basicContent], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Quantum_Era_Presentation_Basic.html';
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                showStatus('✅ Basic version downloaded! File: Quantum_Era_Presentation_Basic.html', 'success');
+                
+            } catch (error) {
+                showStatus('❌ Error creating basic version. Please try again.', 'error');
+                console.error('Download error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
